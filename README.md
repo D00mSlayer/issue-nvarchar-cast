@@ -9,14 +9,20 @@ In my example below, I am inserting simple ascii charset to observe the behaviou
 ## Profiler generated query
 - Using PyODBC (default settings) inserting ASCII to T_VARCHAR
     > declare @p1 int
+    > 
     > set @p1=4
+    > 
     > exec sp_prepexec @p1 output,N'@P1 nvarchar(188)',N'INSERT INTO t_varchar (name) OUTPUT inserted.id VALUES (@P1)',N'!"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+    > 
     > select @p1
 
 - Using PyODBC (setencoding property to utf-8) inserting ASCII to T_VARCHAR
     > declare @p1 int
+    > 
     > set @p1=4
+    > 
     > exec sp_prepexec @p1 output,N'@P1 varchar(94)',N'INSERT INTO t_varchar (name) OUTPUT inserted.id VALUES (@P1)','!"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+    > 
     > select @p1
 
 ## Expectation
