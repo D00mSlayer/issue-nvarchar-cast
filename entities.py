@@ -38,6 +38,6 @@ class T_VARCHAR(DBEntity):
 
 
 def create_session():
-    engine = create_engine('mssql+pyodbc://SA:Jiva@123@test_2022')
+    engine = create_engine('mssql+pyodbc://UID@PWD:DSN')
     DBEntity.metadata.create_all(engine)
     return scoped_session(sessionmaker(bind=engine))
