@@ -35,3 +35,9 @@ class T_VARCHAR(DBEntity):
 
     id = Column(BigInteger, primary_key=True)
     name = Column(String(200, 'SQL_Latin1_General_CP1_CI_AS'))
+
+
+def create_session():
+    engine = create_engine('mssql+pyodbc://SA:Jiva@123@test_2022')
+    DBEntity.metadata.create_all(engine)
+    return scoped_session(sessionmaker(bind=engine))
