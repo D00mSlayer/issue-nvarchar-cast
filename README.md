@@ -12,7 +12,7 @@ In my example below, I am inserting simple ascii charset to observe the behaviou
     > 
     > set @p1=4
     > 
-    > exec sp_prepexec @p1 output,N'@P1 nvarchar(188)',N'INSERT INTO t_varchar (name) OUTPUT inserted.id VALUES (@P1)',N'!"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+    > exec sp_prepexec @p1 output,N'@P1 **nvarchar**(188)',N'INSERT INTO t_varchar (name) OUTPUT inserted.id VALUES (@P1)',N'!"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
     > 
     > select @p1
 
@@ -21,12 +21,12 @@ In my example below, I am inserting simple ascii charset to observe the behaviou
     > 
     > set @p1=4
     > 
-    > exec sp_prepexec @p1 output,N'@P1 varchar(94)',N'INSERT INTO t_varchar (name) OUTPUT inserted.id VALUES (@P1)','!"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+    > exec sp_prepexec @p1 output,N'@P1 **varchar**(94)',N'INSERT INTO t_varchar (name) OUTPUT inserted.id VALUES (@P1)','!"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
     > 
     > select @p1
 
 ## Expectation
-Since the column is VARCHAR, shouldn't SQL Server use VARCHAR and not NVARCHAR? Also, reagarding the collate SQL_Latin1_General_CP1_CI_AS, I understand that SQL Server will try to find the closest match with the corresponding code page for any given character; which is [CP1252](https://en.wikipedia.org/wiki/Windows-1252). If it does not find any, it would just replace with `?`.
+Since the column is VARCHAR, shouldn't SQL Server use VARCHAR and not NVARCHAR? Also, regarding the collate **SQL_Latin1_General_CP1_CI_AS**, I understand that SQL Server will try to find the closest match with the corresponding code page for any given character; which is [CP1252](https://en.wikipedia.org/wiki/Windows-1252). If it does not find any, it would just replace with `?`.
 
 ## How to reproduce
 I have attached a github link with the code. Please have a look [HERE](https://github.com/D00mSlayer/issue-nvarchar-cast).
